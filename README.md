@@ -10,7 +10,8 @@ download(exe):https://github.com/AUSTIN2526/holocure-trainer/releases/download/v
    Lock money and increase money
    
 ● Unlimited special attack(Coming soon)  
-
+    If it doesn't work, press esc  
+    
 ● Extra large pickup range(Coming soon)  
   
 ### Screenshot
