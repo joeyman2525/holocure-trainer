@@ -14,7 +14,7 @@ class Ui_Form(object):
         self.page_button.setText('偵測遊戲')
         
         #功能區
-        func_name = ['鎖血無敵','無限特殊技能(我還沒寫好)','全圖撿物(我還沒寫好)','無限HoloCoin']
+        func_name = ['鎖血無敵','無限特殊技能','全圖撿物(我還沒寫好)','無限HoloCoin']
         self.data = []
         self.makelabel(page, 10, 50, 2000, 30,'功能選擇區:')
         for i in range(len(func_name)):
