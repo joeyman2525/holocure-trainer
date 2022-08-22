@@ -17,6 +17,7 @@ class AppWindow(QWidget):
         
         self.ui.data[0].clicked.connect(self.threading_HP)
         self.ui.data[1].clicked.connect(self.threading_extra)
+        self.ui.data[2].clicked.connect(self.threading_drop)
         self.ui.data[3].clicked.connect(self.threading_Coin)
         
            
@@ -77,6 +78,22 @@ class AppWindow(QWidget):
                     offsets = [0x190C,0x140,0x140,0x140,0x24,0x10,0x9FC,0x4]
                     addr  = self.Hacking(self.game_module + 0x006FBD7C, offsets)
                     self.windows.write_int(addr, 1099214080)
+                    
+                except:
+                    pass
+            else:
+                break
+    def threading_drop(self):
+        drop_t = threading.Thread(target = self.Drop)
+        drop_t.start()
+        
+    def Drop(self):
+        while(1):
+            if self.ui.data[2].isChecked():
+                try:
+                    offsets = [0x4,0x144,0x140,0x24,0x10,0xC0,0x44]
+                    addr  = self.Hacking(self.game_module + 0x006F9CD0, offsets)
+                    self.windows.write_int(addr, 2078525952)
                     
                 except:
                     pass
