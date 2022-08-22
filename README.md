@@ -3,16 +3,18 @@ This is a trainer based on cheat engine and python
 download(exe):https://github.com/AUSTIN2526/holocure-trainer/releases/download/v0.0.2/holocure.exe  
 
 # Function
+If it doesn't work, press esc
 ● Unlimited HP  
     Make the character invincible  
     
 ● Unlimited Coin  
    Lock money and increase money
    
-● Unlimited special attack(Coming soon)  
-    If it doesn't work, press esc  
+● Unlimited special attack
+    Lock the scale  
     
-● Extra large pickup range(Coming soon)  
+● Extra large pickup range
+  Change pickup range  
   
 ### Screenshot
 ![Image text](https://github.com/AUSTIN2526/holocure-trainer/blob/main/screen.png)
