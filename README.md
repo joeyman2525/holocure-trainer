@@ -1,6 +1,6 @@
 ﻿# holocure-trainer
 This is a trainer based on cheat engine and python  
-download(exe):https://github.com/AUSTIN2526/holocure-trainer/releases/download/v0.0.1/holocure.exe  
+download(exe):https://github.com/AUSTIN2526/holocure-trainer/releases/download/v0.0.2/holocure.exe  
 
 # Function
 ● Unlimited HP  
