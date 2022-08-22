@@ -19,7 +19,6 @@ class AppWindow(QWidget):
         self.ui.data[1].clicked.connect(self.threading_extra)
         self.ui.data[2].clicked.connect(self.threading_drop)
         self.ui.data[3].clicked.connect(self.threading_Coin)
-        
            
         self.move(20, 20)
         self.show()
@@ -67,6 +66,7 @@ class AppWindow(QWidget):
                     pass
             else:
                 break
+                
     def threading_extra(self):
         extra_t = threading.Thread(target = self.Extra)
         extra_t.start()
@@ -83,6 +83,7 @@ class AppWindow(QWidget):
                     pass
             else:
                 break
+                
     def threading_drop(self):
         drop_t = threading.Thread(target = self.Drop)
         drop_t.start()
@@ -90,31 +91,28 @@ class AppWindow(QWidget):
     def Drop(self):
         while(1):
             if self.ui.data[2].isChecked():
-                try:
-                    offsets = [0x4,0x144,0x140,0x24,0x10,0xC0,0x44]
-                    addr  = self.Hacking(self.game_module + 0x006F9CD0, offsets)
-                    self.windows.write_int(addr, 2078525952)
-                    
+                try:    
+                    offsets = [0x4,0x24,0x10,0x3C,0x04]
+                    addr_tmp  = self.Hacking(self.game_module + 0x006F9CD0, offsets)   
+                    if self.windows.read_int(addr_tmp) > 1070000000:
+                        addr = addr_tmp
+                    self.windows.write_int(addr, 1099214080)
                 except:
                     pass
             else:
                 break
-    
-        
-        
-    
-        
+      
     def Hacking(self, address, offsets):
         addr = self.windows.read_int(address)
-        for offset in offsets:
-            if offset != offsets[-1]:
-                addr = self.windows.read_int(addr + offset)
-        addr = addr + offsets[-1]
-        return addr
+        for cnt,offset in enumerate(offsets):
+            if cnt+1 != len(offsets):
+                addr = self.windows.read_int(addr + offset)           
+        return addr + offsets[-1]
+        
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    w = AppWindow()
-    w.show()
-    sys.exit(app.exec_())
+
+app = QApplication(sys.argv)
+w = AppWindow()
+w.show()
+sys.exit(app.exec_())
