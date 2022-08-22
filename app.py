@@ -16,6 +16,7 @@ class AppWindow(QWidget):
         self.ui.page_button.clicked.connect(self.find_windows)
         
         self.ui.data[0].clicked.connect(self.threading_HP)
+        self.ui.data[1].clicked.connect(self.threading_extra)
         self.ui.data[3].clicked.connect(self.threading_Coin)
         
            
@@ -65,6 +66,23 @@ class AppWindow(QWidget):
                     pass
             else:
                 break
+    def threading_extra(self):
+        extra_t = threading.Thread(target = self.Extra)
+        extra_t.start()
+     
+    def Extra(self):
+        while(1):
+            if self.ui.data[1].isChecked():
+                try:
+                    offsets = [0x190C,0x140,0x140,0x140,0x24,0x10,0x9FC,0x4]
+                    addr  = self.Hacking(self.game_module + 0x006FBD7C, offsets)
+                    self.windows.write_int(addr, 1099214080)
+                    
+                except:
+                    pass
+            else:
+                break
+    
         
         
     
