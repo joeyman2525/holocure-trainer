@@ -1,9 +1,9 @@
 ﻿# holocure-trainer
 This is a trainer based on cheat engine and python  
 
-holocure version DEMO 0.3.1656491913
-python 3.7.8
-cheat engine 7.3
+holocure version DEMO 0.3.1656491913  
+python 3.7.8  
+cheat engine 7.3  
 
 download(exe):https://github.com/AUSTIN2526/holocure-trainer/releases/tag/v1.0.1
 
