@@ -1,26 +1,26 @@
-﻿# holocure-trainer
-This is a trainer based on cheat engine and python  
+﻿﻿# holocure-trainer
+This is a trainer based on cheat engine and python 
 
 holocure version DEMO 0.3.1656491913  
-python 3.7.8  
-cheat engine 7.3  
 
-download(exe):https://github.com/AUSTIN2526/holocure-trainer/releases/tag/v1.0.1
+download(exe):https://github.com/AUSTIN2526/holocure-trainer/releases
 
 # Function
-Current versions(v1.0.1) Use a lot of computer resources, subsequent versions will reduce modify frequency
-
 ● Unlimited HP  
-  Make the character invincible  
+  Make you character invincible  
   
 ● Unlimited special attack  
   Lock the scale  
 
 ● Extra large pickup range  
-  Change pickup range    
+  Increase pickup range to 99999999 
 
 ● Unlimited Coin  
-    Lock money and increase money  
+  Increase coin to 99999999  
+  
+●increase attack(coming soon)  
+
+●increase haste (coming soon)  
     
 If it doesn't work, press esc can help you solve the problem  
 
