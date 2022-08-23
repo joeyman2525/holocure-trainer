@@ -8,6 +8,8 @@ cheat engine 7.3
 download(exe):https://github.com/AUSTIN2526/holocure-trainer/releases/tag/v1.0.1
 
 # Function
+Current versions(v1.0.1) Use a lot of computer resources, subsequent versions will reduce modify frequency
+
 ● Unlimited HP  
   Make the character invincible  
   
