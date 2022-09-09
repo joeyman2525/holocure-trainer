@@ -23,10 +23,10 @@ Modified holocure version DEMO 0.4.166272858
   Increase coin to 99999999(this value initial is -64, so your holocoin should higher than 64)  
   
 ●increase attack(maybe coming soon)  
-  Maybe 9/9 will be updated  
+  maybe coming soon  
   
 ●increase haste (maybe coming soon)  
-  Maybe 9/9 will be updated   
+ maybe coming soon   
   
 If function doesn't work, press esc can help you solve the problem  
 
