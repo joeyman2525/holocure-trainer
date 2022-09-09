@@ -30,7 +30,7 @@ class AppWindow(QWidget):
             #視窗名稱
             self.windows = Pymem("HoloCure.exe")
             #取得dll
-            self.game_module = module_from_name(self.windows.process_handle, "Holocure.exe").lpBaseOfDll
+            self.game_module = module_from_name(self.windows.process_handle, "HoloCure.exe").lpBaseOfDll
             #啟用功能
             for cnt,i in enumerate(self.ui.extra_func):
                 if cnt == 5 or cnt == 4:
@@ -50,10 +50,10 @@ class AppWindow(QWidget):
     def Enable(self,text):
         #index, base address, offsets
         options_info = {
-                     '鎖血無敵':[0,0x006FBD7C,[0x190C,0x144,0x140,0x140,0x140,0x140,0x24,0x10,0x2B8,0x4],1200470147],
-                     '無限特殊技能':[1,0x006FBD7C, [0x190C,0x140,0x140,0x140,0x24,0x10,0x9FC,0x4],1100470147],
-                     '全圖撿物':[2,0x006F9CD0,[0x4,0x24,0x10,0x3C,0x04],1100470147],
-                     '增加HoloCoin':[3,0x00705AB4, [0x4,0x0,0x18,0xA4,0x334],1100470147],
+                     '鎖血無敵':[0,0x006FBD7C,[0x1900,0x140,0x24,0x10,0x144,0x4],1200470147],
+                     '無限特殊技能':[1,0x006FBD7C, [0x1900,0x140,0x24,0x10,0x2DC,0x04],1100470147],
+                     '全圖撿物':[2,0x006FBD7C,[0x18FC,0x144,0x140,0x140,0x140,0x24,0x10,0x798,0x04],1100470147],
+                     '增加HoloCoin':[3,0x00448E48, [0x270,0xc,0x24,0x494],1100470147],
                     }
         index, address, offsets,value = options_info[text]
         
