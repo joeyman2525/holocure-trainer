@@ -3,7 +3,7 @@ from PyQt5 import QtCore, QtWidgets
 class Ui_Form(object):
     def setupUi(self, page):
         form_w = 440
-        form_h = 160
+        form_h = 240
         page.resize(form_w, form_h)
         page.setWindowTitle('HoloCure修改器 by AUSTIN2526')
         
@@ -13,17 +13,35 @@ class Ui_Form(object):
         self.page_button.setGeometry(QtCore.QRect(10,10,100,30))
         self.page_button.setText('偵測遊戲')
         
-        #入場前數據
-        func_name = ['鎖血無敵', '無限特殊技能', '全圖撿物','增加HoloCoin', '增加攻擊力', '增加Haste']
-        self.makelabel(page, 10, 50, 2000, 30,'↓↓↓↓↓↓↓↓↓↓功能選擇區↓↓↓↓↓↓↓↓↓↓')
-        self.extra_func = []
-        for i in range(3):
-            for j in range(2):
-                index = j + i * 2
-                self.extra_func.append(QtWidgets.QCheckBox(page))
-                self.extra_func[index].setGeometry(QtCore.QRect(10 + 140*i, 80 + j*30, 2000, 30))
-                self.extra_func[index].setText(func_name[index])
-                self.extra_func[index].setEnabled(False)
+        #第一關數據
+        func_name = ['鎖血無敵', '無限特殊技能', '全圖撿物']
+        self.makelabel(page, 10, 50, 2000, 30,'Stage1 修改區')
+        self.stage_1 = []
+        for index in range(3):
+            self.stage_1.append(QtWidgets.QCheckBox(page))
+            self.stage_1[index].setGeometry(QtCore.QRect(10 + 140*index, 80 , 2000, 30))
+            self.stage_1[index].setText(func_name[index])
+            self.stage_1[index].setEnabled(False)
+            
+        #第二關數據
+        func_name = ['鎖血無敵', '無限特殊技能', '全圖撿物']
+        self.makelabel(page, 10, 110, 2000, 30,'Stage2 修改區')
+        self.stage_2 = []
+        for index in range(3):
+            self.stage_2.append(QtWidgets.QCheckBox(page))
+            self.stage_2[index].setGeometry(QtCore.QRect(10 + 140*index, 140 , 2000, 30))
+            self.stage_2[index].setText(func_name[index])
+            self.stage_2[index].setEnabled(False)
+        
+        #其他功能
+        func_name = ['無限HoloCoin']
+        self.makelabel(page, 10, 170, 2000, 30,'其他   修改區')
+        self.other = []
+        for index in range(1):
+            self.other.append(QtWidgets.QCheckBox(page))
+            self.other[index].setGeometry(QtCore.QRect(10 + 140*index, 200 , 2000, 30))
+            self.other[index].setText(func_name[index])
+            self.other[index].setEnabled(False)
            
     def makelabel(self, page, x=10, y=10, w=10, h=20, text='', s=True):
         self.label = QtWidgets.QLabel(page)
