@@ -17,10 +17,10 @@ Modified holocure version DEMO 0.4.1662728581
   Lock the scale(special attack must be unlocked)
 
 ● Extra large pickup range  
-  Increase pickup range to 99999999(pickup range must be greater than zero)
+  Increase pickup range to 99999999(pickup range must be higher than zero)
 
 ● Unlimited Coin  
-  Increase coin to 99999999(this value initial is -64, so your holocoin should higher than 64)  
+  Increase coin to 99999999(must be higher than randomMoneyKey)  
   
 ●increase attack(maybe coming soon)  
   maybe coming soon  
