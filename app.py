@@ -1,10 +1,10 @@
-import numpy as np
 import sys
+import threading
 from PyQt5.QtWidgets import QApplication, QMessageBox, QWidget
 from UI import Ui_Form
 from pymem import *
 from pymem.process import *
-import threading
+from time import sleep
 
 class AppWindow(QWidget):
 
@@ -17,152 +17,77 @@ class AppWindow(QWidget):
         self.ui.page_button.clicked.connect(self.find_windows)  
         
         #stage1
-        self.ui.stage_1[0].clicked.connect(lambda: self.stage_1_threading(self.ui.stage_1[0].text()))
-        self.ui.stage_1[1].clicked.connect(lambda: self.stage_1_threading(self.ui.stage_1[1].text()))
-        self.ui.stage_1[2].clicked.connect(lambda: self.stage_1_threading(self.ui.stage_1[2].text()))        
+        self.ui.stage_1[0].clicked.connect(lambda: self.threading_function('stage1_HP'))
+        self.ui.stage_1[1].clicked.connect(lambda: self.threading_function('stage1_EX'))
+        self.ui.stage_1[2].clicked.connect(lambda: self.threading_function('stage1_range'))  
+        
         #stage2
-        self.ui.stage_2[0].clicked.connect(lambda: self.stage_2_threading(self.ui.stage_2[0].text()))
-        self.ui.stage_2[1].clicked.connect(lambda: self.stage_2_threading(self.ui.stage_2[1].text()))
-        self.ui.stage_2[2].clicked.connect(lambda: self.stage_2_threading(self.ui.stage_2[2].text()))
+        self.ui.stage_2[0].clicked.connect(lambda: self.threading_function('stage2_HP'))
+        self.ui.stage_2[1].clicked.connect(lambda: self.threading_function('stage2_EX'))
+        self.ui.stage_2[2].clicked.connect(lambda: self.threading_function('stage2_range'))
+        
         #stage3
-        self.ui.stage_3[0].clicked.connect(lambda: self.stage_3_threading(self.ui.stage_3[0].text()))
-        self.ui.stage_3[1].clicked.connect(lambda: self.stage_3_threading(self.ui.stage_3[1].text()))
-        self.ui.stage_3[2].clicked.connect(lambda: self.stage_3_threading(self.ui.stage_3[2].text()))
+        self.ui.stage_3[0].clicked.connect(lambda: self.threading_function('stage3_HP'))
+        self.ui.stage_3[1].clicked.connect(lambda: self.threading_function('stage3_EX'))
+        self.ui.stage_3[2].clicked.connect(lambda: self.threading_function('stage3_range'))
+        
         #other
-        self.ui.other[0].clicked.connect(lambda: self.other_threading(self.ui.other[0].text()))
+        self.ui.other[0].clicked.connect(lambda: self.threading_function('coin'))
 
            
         self.move(40, 40)
         self.show()
         
     def find_windows(self):
+        functions = [self.ui.stage_1, self.ui.stage_2, self.ui.stage_3, self.ui.other]
+
         try:
-            #視窗名稱
             self.windows = Pymem("HoloCure.exe")
-            #取得dll
             self.game_module = module_from_name(self.windows.process_handle, "HoloCure.exe").lpBaseOfDll
-            #啟用功能
-            for i in self.ui.stage_1:
-                i.setEnabled(True)
-            for i in self.ui.stage_2:
-                i.setEnabled(True)
-            for i in self.ui.stage_3:
-                i.setEnabled(True)
-            for i in self.ui.other:
-                i.setEnabled(True)
+            for function in functions:
+                for enable in function:
+                    enable.setEnabled(True) 
             QMessageBox.information(None, '掃描', '已掃描到遊戲')
+            
         except:
             QMessageBox.critical(None, '錯誤', '請先開啟遊戲後再按偵測程式')
             
-    def stage_1_threading(self, text):   
-        t = threading.Thread(target = self.stage_1_enable,args = (text,))
+    def threading_function(self, text):   
+        t = threading.Thread(target = self.threading_enable, args = (text,))
         t.setDaemon(True)
         t.start()
     
-    def stage_1_enable(self,text):
-        #index, base address, offsets
+    def threading_enable(self,text):
         options_info = {
-                     '鎖血無敵':[0,0x006FBD7C,[0x1900,0x140,0x24,0x10,0x144,0x4],1200470147],
-                     '無限特殊技能':[1,0x006FBD7C, [0x1900,0x140,0x24,0x10,0x2DC,0x04],1100470147],
-                     '全圖撿物':[2,0x006FBD7C,[0x1900,0x140,0x24,0x10,0x798,0x04],1100470147],
+                     'stage1_HP':[self.ui.stage_1[0], 1104006500, 0x006FBD7C,[0x1900,0x140,0x24,0x10,0x144,0x4]],
+                     'stage1_EX':[self.ui.stage_1[1], 1104006500, 0x006FBD7C, [0x1900,0x140,0x24,0x10,0x2DC,0x04]],
+                     'stage1_range':[self.ui.stage_1[2], 1104006500, 0x006FBD7C,[0x1900,0x140,0x24,0x10,0x798,0x04]],
+                     'stage2_HP':[self.ui.stage_2[0], 1104006500, 0x006FBD7C,[0x564,0x144,0x24,0x10,0x168,0x0,0x78,0x140,0x24,0x10,0x144,0x04]],
+                     'stage2_EX':[self.ui.stage_2[1], 1104006500, 0x006FBD7C, [0x564,0x144,0x24,0x10,0x168,0x0,0x78,0x140,0x24,0x10,0x2DC,0x4]],
+                     'stage2_range':[self.ui.stage_2[2], 1104006500, 0x006FBD7C,[0x564,0x144,0x24,0x10,0x168,0x0,0x78,0x140,0x24,0x10,0x798,0x4]],
+                     'stage3_HP':[self.ui.stage_3[0], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x144,0x04]],
+                     'stage3_EX':[self.ui.stage_3[1], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x2DC,0x4]],
+                     'stage3_range':[self.ui.stage_3[2], 1104006500, 0x006FBD7C,[0x18FC,0x140,0x24,0x10,0x798,0x4]],
+                     'coin':[self.ui.other[0], 1104006500, 0x00448E48, [0x270,0xc,0x24,0x494]],
                     }
-        index, address, offsets, value = options_info[text]
-        
+        function, value, address, offsets = options_info[text]
         while(1):
-            #判斷開關是否開啟
-            if self.ui.stage_1[index].isChecked():
+            if function.isChecked():
                 try:
-                    addr  = self.Hacking(self.game_module + address, offsets)
-                    #防止重複覆蓋數據造成CPU的負擔
+                    addr  = self.calculate_offsets(self.game_module + address, offsets)
                     if self.windows.read_int(addr) != value:
                         self.windows.write_int(addr, value)
+                        sleep(1/1000)
                 except:
                     pass
             else:
                 break
     
-    def stage_2_threading(self, text):   
-        t = threading.Thread(target = self.stage_2_enable,args = (text,))
-        t.setDaemon(True)
-        t.start()
-    
-    def stage_2_enable(self,text):
-        #index, base address, offsets
-        options_info = {
-                     '鎖血無敵':[0,0x006FBD7C,[0x564,0x144,0x24,0x10,0x168,0x0,0x78,0x140,0x24,0x10,0x144,0x04],1200470147],
-                     '無限特殊技能':[1,0x006FBD7C, [0x564,0x144,0x24,0x10,0x168,0x0,0x78,0x140,0x24,0x10,0x2DC,0x4],1100470147],
-                     '全圖撿物':[2,0x006FBD7C,[0x564,0x144,0x24,0x10,0x168,0x0,0x78,0x140,0x24,0x10,0x798,0x4],1100470147], 
-                    }
-        index, address, offsets,value = options_info[text]
-        
-        while(1):
-            #判斷開關是否開啟
-            if self.ui.stage_2[index].isChecked():
-                try:
-                    addr  = self.Hacking(self.game_module + address, offsets)
-                    ##防止重複覆蓋數據造成CPU的負擔
-                    if self.windows.read_int(addr) != value:
-                        self.windows.write_int(addr, value)
-                except:
-                    pass
-            else:
-                break
-                
-    def stage_3_threading(self, text):   
-        t = threading.Thread(target = self.stage_3_enable,args = (text,))
-        t.setDaemon(True)
-        t.start()
-    
-    def stage_3_enable(self,text):
-        #index, base address, offsets
-        options_info = {
-                     '鎖血無敵':[0,0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x144,0x04],1200470147],
-                     '無限特殊技能':[1,0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x2DC,0x4],1100470147],
-                     '全圖撿物':[2,0x006FBD7C,[0x18FC,0x140,0x24,0x10,0x798,0x4],1100470147], 
-                    }
-        index, address, offsets,value = options_info[text]
-        
-        while(1):
-            #判斷開關是否開啟
-            if self.ui.stage_3[index].isChecked():
-                try:
-                    addr  = self.Hacking(self.game_module + address, offsets)
-                    ##防止重複覆蓋數據造成CPU的負擔
-                    if self.windows.read_int(addr) != value:
-                        self.windows.write_int(addr, value)
-                except:
-                    pass
-            else:
-                break
-                
-    def other_threading(self, text):   
-        t = threading.Thread(target = self.other_enable,args = (text,))
-        #防止子線程未關閉
-        t.setDaemon(True)
-        t.start()
-        #print(threading.active_count()) 
-    
-    def other_enable(self,text):
-        #index, base address, offsets
-        options_info = {'無限HoloCoin':[0,0x00448E48, [0x270,0xc,0x24,0x494],1100470147]}
-        index, address, offsets,value = options_info[text]
-        
-       
-        while(1):
-            #判斷開關是否開啟
-            if self.ui.other[index].isChecked():
-                try:
-                    addr  = self.Hacking(self.game_module + address, offsets)
-                    ##防止重複覆蓋數據造成CPU的負擔
-                    if self.windows.read_int(addr) != value:
-                        self.windows.write_int(addr, value)
-                except:
-                    pass
-            else:
-                break
+   
+     
     
     
-    def Hacking(self, address, offsets):
+    def calculate_offsets(self, address, offsets):
         addr = self.windows.read_int(address)
         for cnt,offset in enumerate(offsets):
             if cnt+1 != len(offsets):

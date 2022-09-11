@@ -33,7 +33,7 @@ class Ui_Form(object):
             self.stage_2[index].setText(func_name[index])
             self.stage_2[index].setEnabled(False)
             
-        
+        #第三關數據
         func_name = ['鎖血無敵', '無限特殊技能', '全圖撿物']
         self.makelabel(page, 10, 170, 2000, 30,'Stage3 修改區')
         self.stage_3 = []
