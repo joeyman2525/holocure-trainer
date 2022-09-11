@@ -33,5 +33,5 @@ If function doesn't work, press esc can help you solve the problem
 3.Click on the option when you need
 
 ## Please note
-1.Don't use HoloCure Launcher open the game
-2.Unlocking the collabs recipe function will not work
+1.Don't use HoloCure Launcher open the game  
+2.Unlocking the collabs recipe function will not work  
