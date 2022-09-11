@@ -24,6 +24,10 @@ class AppWindow(QWidget):
         self.ui.stage_2[0].clicked.connect(lambda: self.stage_2_threading(self.ui.stage_2[0].text()))
         self.ui.stage_2[1].clicked.connect(lambda: self.stage_2_threading(self.ui.stage_2[1].text()))
         self.ui.stage_2[2].clicked.connect(lambda: self.stage_2_threading(self.ui.stage_2[2].text()))
+        #stage3
+        self.ui.stage_3[0].clicked.connect(lambda: self.stage_3_threading(self.ui.stage_3[0].text()))
+        self.ui.stage_3[1].clicked.connect(lambda: self.stage_3_threading(self.ui.stage_3[1].text()))
+        self.ui.stage_3[2].clicked.connect(lambda: self.stage_3_threading(self.ui.stage_3[2].text()))
         #other
         self.ui.other[0].clicked.connect(lambda: self.other_threading(self.ui.other[0].text()))
 
@@ -42,6 +46,8 @@ class AppWindow(QWidget):
                 i.setEnabled(True)
             for i in self.ui.stage_2:
                 i.setEnabled(True)
+            for i in self.ui.stage_3:
+                i.setEnabled(True)
             for i in self.ui.other:
                 i.setEnabled(True)
             QMessageBox.information(None, '掃描', '已掃描到遊戲')
@@ -58,7 +64,7 @@ class AppWindow(QWidget):
         options_info = {
                      '鎖血無敵':[0,0x006FBD7C,[0x1900,0x140,0x24,0x10,0x144,0x4],1200470147],
                      '無限特殊技能':[1,0x006FBD7C, [0x1900,0x140,0x24,0x10,0x2DC,0x04],1100470147],
-                     '全圖撿物':[2,0x006FBD7C,[0x18FC,0x144,0x140,0x140,0x140,0x24,0x10,0x798,0x04],1100470147],
+                     '全圖撿物':[2,0x006FBD7C,[0x1900,0x140,0x24,0x10,0x798,0x04],1100470147],
                     }
         index, address, offsets, value = options_info[text]
         
@@ -83,15 +89,42 @@ class AppWindow(QWidget):
     def stage_2_enable(self,text):
         #index, base address, offsets
         options_info = {
-                     '鎖血無敵':[0,0x006FBD7C,[0x564,0x144,0x24,0x10,0x1E0,0x0,0x68,0x140,0x24,0x10,0x144,0x4],1200470147],
-                     '無限特殊技能':[1,0x006FBD7C, [0x564,0x144,0x24,0x10,0x9CC,0x0,0x78,0x140,0x24,0x10,0x2DC,0x4],1100470147],
-                     '全圖撿物':[2,0x006FBD7C,[0x564,0x144,0x24,0x10,0x33C,0x0,0x78,0x140,0x24,0x10,0x798,0x4],1100470147], 
+                     '鎖血無敵':[0,0x006FBD7C,[0x564,0x144,0x24,0x10,0x168,0x0,0x78,0x140,0x24,0x10,0x144,0x04],1200470147],
+                     '無限特殊技能':[1,0x006FBD7C, [0x564,0x144,0x24,0x10,0x168,0x0,0x78,0x140,0x24,0x10,0x2DC,0x4],1100470147],
+                     '全圖撿物':[2,0x006FBD7C,[0x564,0x144,0x24,0x10,0x168,0x0,0x78,0x140,0x24,0x10,0x798,0x4],1100470147], 
                     }
         index, address, offsets,value = options_info[text]
         
         while(1):
             #判斷開關是否開啟
             if self.ui.stage_2[index].isChecked():
+                try:
+                    addr  = self.Hacking(self.game_module + address, offsets)
+                    ##防止重複覆蓋數據造成CPU的負擔
+                    if self.windows.read_int(addr) != value:
+                        self.windows.write_int(addr, value)
+                except:
+                    pass
+            else:
+                break
+                
+    def stage_3_threading(self, text):   
+        t = threading.Thread(target = self.stage_3_enable,args = (text,))
+        t.setDaemon(True)
+        t.start()
+    
+    def stage_3_enable(self,text):
+        #index, base address, offsets
+        options_info = {
+                     '鎖血無敵':[0,0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x144,0x04],1200470147],
+                     '無限特殊技能':[1,0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x2DC,0x4],1100470147],
+                     '全圖撿物':[2,0x006FBD7C,[0x18FC,0x140,0x24,0x10,0x798,0x4],1100470147], 
+                    }
+        index, address, offsets,value = options_info[text]
+        
+        while(1):
+            #判斷開關是否開啟
+            if self.ui.stage_3[index].isChecked():
                 try:
                     addr  = self.Hacking(self.game_module + address, offsets)
                     ##防止重複覆蓋數據造成CPU的負擔

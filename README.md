@@ -6,7 +6,7 @@ download(exe)
 ```
 https://github.com/AUSTIN2526/holocure-trainer/releases
 ```
-Modified holocure version DEMO 0.4.1662728581
+Modified holocure version DEMO 0.4.1662787865
 
 # Function
 
@@ -22,12 +22,6 @@ Modified holocure version DEMO 0.4.1662728581
 ● Unlimited Coin  
   Increase coin to 99999999(must be higher than randomMoneyKey)  
   
-●increase attack(maybe coming soon)  
-  maybe coming soon  
-  
-●increase haste (maybe coming soon)  
- maybe coming soon   
-  
 If function doesn't work, press esc can help you solve the problem  
 
 # Screenshot
@@ -37,3 +31,7 @@ If function doesn't work, press esc can help you solve the problem
 1.Open holocure and trainer  
 2.Click the detect button   
 3.Click on the option when you need
+
+## Please note
+1.Don't use HoloCure Launcher open the game
+2.Unlocking the collabs recipe function will not work

@@ -3,7 +3,7 @@ from PyQt5 import QtCore, QtWidgets
 class Ui_Form(object):
     def setupUi(self, page):
         form_w = 440
-        form_h = 240
+        form_h = 300
         page.resize(form_w, form_h)
         page.setWindowTitle('HoloCure修改器 by AUSTIN2526')
         
@@ -32,14 +32,24 @@ class Ui_Form(object):
             self.stage_2[index].setGeometry(QtCore.QRect(10 + 140*index, 140 , 2000, 30))
             self.stage_2[index].setText(func_name[index])
             self.stage_2[index].setEnabled(False)
+            
+        
+        func_name = ['鎖血無敵', '無限特殊技能', '全圖撿物']
+        self.makelabel(page, 10, 170, 2000, 30,'Stage3 修改區')
+        self.stage_3 = []
+        for index in range(3):
+            self.stage_3.append(QtWidgets.QCheckBox(page))
+            self.stage_3[index].setGeometry(QtCore.QRect(10 + 140*index, 200 , 2000, 30))
+            self.stage_3[index].setText(func_name[index])
+            self.stage_3[index].setEnabled(False)
         
         #其他功能
         func_name = ['無限HoloCoin']
-        self.makelabel(page, 10, 170, 2000, 30,'其他   修改區')
+        self.makelabel(page, 10, 230, 2000, 30,'其他   修改區')
         self.other = []
         for index in range(1):
             self.other.append(QtWidgets.QCheckBox(page))
-            self.other[index].setGeometry(QtCore.QRect(10 + 140*index, 200 , 2000, 30))
+            self.other[index].setGeometry(QtCore.QRect(10 + 140*index, 260 , 2000, 30))
             self.other[index].setText(func_name[index])
             self.other[index].setEnabled(False)
            
