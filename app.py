@@ -33,6 +33,9 @@ class AppWindow(QWidget):
         
         #other
         self.ui.other[0].clicked.connect(lambda: self.threading_function('coin'))
+        self.ui.other[1].clicked.connect(lambda: self.threading_function('lavelup'))
+
+        
 
            
         self.move(40, 40)
@@ -68,7 +71,8 @@ class AppWindow(QWidget):
                      'stage3_HP':[self.ui.stage_3[0], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x144,0x04]],
                      'stage3_EX':[self.ui.stage_3[1], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x2DC,0x4]],
                      'stage3_range':[self.ui.stage_3[2], 1104006500, 0x006FBD7C,[0x18FC,0x140,0x24,0x10,0x798,0x4]],
-                     'coin':[self.ui.other[0], 1104006500, 0x00448E48, [0x270,0xc,0x24,0x494]],
+                     'coin':[self.ui.other[0], 1104006500, 0x00705AB4, [0x4,0x0,0x0,0x140,0xC,0x14]],
+                     'lavelup':[self.ui.other[1], 1072693248, 0x006FBD7C, [0x18FC,0x10,0x84,0x7C,0x8C,0xC84]],
                     }
         function, value, address, offsets = options_info[text]
         while(1):
@@ -77,7 +81,7 @@ class AppWindow(QWidget):
                     addr  = self.calculate_offsets(self.game_module + address, offsets)
                     if self.windows.read_int(addr) != value:
                         self.windows.write_int(addr, value)
-                        sleep(100/1000)
+                        #sleep(100/1000)
                 except:
                     pass
             else:

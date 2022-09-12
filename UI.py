@@ -27,7 +27,7 @@ class Ui_Form(object):
         func_name = ['鎖血無敵', '無限特殊技能', '全圖撿物']
         self.makelabel(page, 10, 110, 2000, 30,'Stage2 修改區')
         self.stage_2 = []
-        for index in range(3):
+        for index in range(len(func_name)):
             self.stage_2.append(QtWidgets.QCheckBox(page))
             self.stage_2[index].setGeometry(QtCore.QRect(10 + 140*index, 140 , 2000, 30))
             self.stage_2[index].setText(func_name[index])
@@ -37,17 +37,17 @@ class Ui_Form(object):
         func_name = ['鎖血無敵', '無限特殊技能', '全圖撿物']
         self.makelabel(page, 10, 170, 2000, 30,'Stage3 修改區')
         self.stage_3 = []
-        for index in range(3):
+        for index in range(len(func_name)):
             self.stage_3.append(QtWidgets.QCheckBox(page))
             self.stage_3[index].setGeometry(QtCore.QRect(10 + 140*index, 200 , 2000, 30))
             self.stage_3[index].setText(func_name[index])
             self.stage_3[index].setEnabled(False)
         
         #其他功能
-        func_name = ['無限HoloCoin']
+        func_name = ['無限HoloCoin', '無限等級']
         self.makelabel(page, 10, 230, 2000, 30,'其他   修改區')
         self.other = []
-        for index in range(1):
+        for index in range(len(func_name)):
             self.other.append(QtWidgets.QCheckBox(page))
             self.other[index].setGeometry(QtCore.QRect(10 + 140*index, 260 , 2000, 30))
             self.other[index].setText(func_name[index])
