@@ -12,7 +12,14 @@ class AppWindow(QWidget):
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        
+        self.lang = self.ui.lang
+        self.language = {'zh_TW':{'scan':['掃描', '已掃描到遊戲',],
+                             'error':['錯誤', '請先開啟遊戲後再按偵測程式']},
+                             
+                    'en':{'scan':['Scen','Scan Completed'],
+                          'error':['Error','Please start the game first, then click the detect button']}
+                          
+        }
         #偵測按鈕
         self.ui.page_button.clicked.connect(self.find_windows)  
         
@@ -50,10 +57,10 @@ class AppWindow(QWidget):
             for function in functions:
                 for enable in function:
                     enable.setEnabled(True) 
-            QMessageBox.information(None, '掃描', '已掃描到遊戲')
+            QMessageBox.information(None, self.language[self.lang]['scan'][0], self.language[self.lang]['scan'][1])
             
         except:
-            QMessageBox.critical(None, '錯誤', '請先開啟遊戲後再按偵測程式')
+            QMessageBox.critical(None, self.language[self.lang]['error'][0], self.language[self.lang]['error'][1])
             
     def threading_function(self, text):   
         t = threading.Thread(target = self.threading_enable, args = (text,))
