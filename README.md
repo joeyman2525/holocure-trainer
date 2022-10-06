@@ -22,7 +22,7 @@ Modified holocure version DEMO 0.4.1662787865
 ● Unlimited Coin  
   Increase coin to 999999999  
   
-● Unlimited EXP  
+● Unlimited EXP(remove)  
 	Reduce current level to achieve upgrad effect(when your level is too high please do not use this function)  
 	
 If function doesn't work, press esc can help you solve the problem  

@@ -18,19 +18,19 @@ class Ui_Form(object):
                           'info':'【啟動遊戲後按偵測按鈕遊戲即可啟用功能】',
                           'detect_button':'偵測遊戲',
                           'func_name':['鎖血無敵','無限特殊技能','全圖撿物'],
-                          'other_func':['無限HoloCoin','無限升級'],
+                          'other_func':['無限HoloCoin','無限升級(移除)'],
                           'stage_1':'關卡 1',
                           'stage_2':'關卡 2',
-                          'stage_3':'關卡 1',
+                          'stage_3':'關卡 1 (Hard)',
                           'other':'其他'},
                     'en':{'ui_name':'HoloCure Trainer  by AUSTIN2526',
                           'info':'【Pleas click the detect button to enable function】',
                           'detect_button':'Detect',
                           'func_name':['Unlimited HP','Unlimited SP','EX Pick Range'],
-                          'other_func':['Unlimited Coin','Unlimited EXP'],
+                          'other_func':['Unlimited Coin','Unlimited EXP(remove)'],
                           'stage_1':'Stage 1',
                           'stage_2':'Stage 2',
-                          'stage_3':'Stage 3',
+                          'stage_3':'Stage 1 (Hard)',
                           'other':'other'}
                           
         }

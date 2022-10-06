@@ -49,7 +49,7 @@ class AppWindow(QWidget):
         self.show()
         
     def find_windows(self):
-        functions = [self.ui.stage_1, self.ui.stage_2, self.ui.stage_3, self.ui.other]
+        functions = [self.ui.stage_1, self.ui.stage_2, self.ui.stage_3]
 
         try:
             self.windows = Pymem("HoloCure.exe")
@@ -57,6 +57,7 @@ class AppWindow(QWidget):
             for function in functions:
                 for enable in function:
                     enable.setEnabled(True) 
+                self.ui.other[0].setEnabled(True)
             QMessageBox.information(None, self.language[self.lang]['scan'][0], self.language[self.lang]['scan'][1])
             
         except:
@@ -69,15 +70,15 @@ class AppWindow(QWidget):
     
     def threading_enable(self,text):
         options_info = {
-                     'stage1_HP':[self.ui.stage_1[0], 1104006500, 0x006FBD7C,[0x1900,0x140,0x24,0x10,0x144,0x4]],
-                     'stage1_EX':[self.ui.stage_1[1], 1104006500, 0x006FBD7C, [0x1900,0x140,0x24,0x10,0x2DC,0x04]],
-                     'stage1_range':[self.ui.stage_1[2], 1104006500, 0x006FBD7C,[0x1900,0x140,0x24,0x10,0x798,0x04]],
-                     'stage2_HP':[self.ui.stage_2[0], 1104006500, 0x006FBD7C,[0x1830,0x140,0x24,0x10,0x144,0x04]],
-                     'stage2_EX':[self.ui.stage_2[1], 1104006500, 0x006FBD7C, [0x1830,0x140,0x24,0x10,0x2DC,0x4]],
-                     'stage2_range':[self.ui.stage_2[2], 1104006500, 0x006FBD7C,[0x1830,0x140,0x24,0x10,0x798,0x4]],
-                     'stage3_HP':[self.ui.stage_3[0], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x144,0x04]],
-                     'stage3_EX':[self.ui.stage_3[1], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x2DC,0x4]],
-                     'stage3_range':[self.ui.stage_3[2], 1104006500, 0x006FBD7C,[0x18FC,0x140,0x24,0x10,0x798,0x4]],
+                     'stage1_HP':[self.ui.stage_1[0], 1104006500, 0x006FBD7C,[0x1900,0x140,0x24,0x10,0x990,0x4]],
+                     'stage1_EX':[self.ui.stage_1[1], 1104006500, 0x006FBD7C, [0x1900,0x140,0x24,0x10,0xB28,0x04]],
+                     'stage1_range':[self.ui.stage_1[2], 1104006500, 0x006FBD7C,[0x1900,0x140,0x24,0x10,0x3E4,0x04]],
+                     'stage2_HP':[self.ui.stage_2[0], 1104006500, 0x006FBD7C,[0x1830,0x140,0x24,0x10,0x990,0x04]],
+                     'stage2_EX':[self.ui.stage_2[1], 1104006500, 0x006FBD7C, [0x1830,0x140,0x24,0x10,0xB28,0x4]],
+                     'stage2_range':[self.ui.stage_2[2], 1104006500, 0x006FBD7C,[0x1830,0x140,0x24,0x10,0x3E4,0x4]],
+                     'stage3_HP':[self.ui.stage_3[0], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x990,0x04]],
+                     'stage3_EX':[self.ui.stage_3[1], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0xB28,0x4]],
+                     'stage3_range':[self.ui.stage_3[2], 1104006500, 0x006FBD7C,[0x18FC,0x140,0x24,0x10,0x3E4,0x4]],
                      'coin':[self.ui.other[0], 1104006500, 0x00705AB4, [0x4,0x0,0x0,0x140,0xC,0x14]],
                      'lavelup':[self.ui.other[1], 1072693248, 0x006FBD7C, [0x18FC,0x10,0x84,0x7C,0x8C,0xC84]],
                     }
