@@ -13,10 +13,10 @@ https://github.com/AUSTIN2526/holocure-trainer/releases
   Make your character invincible  
   
 ● Unlimited special attack  
-  Lock the scale(special attack must be unlocked)  
+  Lock the scale
 
 ● Extra large pickup range  
-  Increase pickup range to 999999999(pickup range must be higher than zero)  
+  Increase pickup range to 999999999
 
 ● Unlimited Coin  
   Increase coin to 999999999  
