@@ -6,7 +6,6 @@ download(exe)
 ```
 https://github.com/AUSTIN2526/holocure-trainer/releases
 ```
-Modified holocure version DEMO 0.4.1662787865  
 
 # Function  
 
