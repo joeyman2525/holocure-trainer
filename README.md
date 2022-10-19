@@ -6,7 +6,7 @@ This is a translated copy of v1.0.2 of holocure-trainer for version 0.3 of HoloC
 download(exe)  
 
 ```
-https://github.com/AUSTIN2526/holocure-trainer/releases
+https://github.com/joeyman2525/holocure-trainer/releases/tag/v1.0.2-English
 ```
 
 # Function  
