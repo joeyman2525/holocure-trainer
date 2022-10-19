@@ -5,7 +5,7 @@ class Ui_Form(object):
         form_w = 655
         form_h = 160
         page.resize(form_w, form_h)
-        page.setWindowTitle('HoloCure Modifier by AUSTIN2526')
+        page.setWindowTitle('HoloCure Modifier by AUSTIN2526, Translated by joeyman2525')
 
         self.makelabel(page, 160, 10, 2500, 30,'【After starting the game, press the detection button to enable modifier functionality】')
         #detect game
