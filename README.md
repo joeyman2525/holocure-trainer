@@ -27,7 +27,7 @@ https://github.com/AUSTIN2526/holocure-trainer/releases
  Reduce current level to achieve upgrad effect(when your level is too high please do not use this function)  
 	
 # Screenshot  
-![Image text](https://github.com/AUSTIN2526/holocure-trainer/blob/main/screen.png)  
+![Image text](https://github.com/joeyman2525/holocure-trainer/blob/main/V1.0.2%20English.jpg)  
    
 # How to use  
 1.Open holocure and trainer  
