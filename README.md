@@ -22,9 +22,6 @@ https://github.com/joeyman2525/holocure-trainer/releases/tag/v1.0.2-English
 
 ● Unlimited Coin  
   Increase coin to 999999999  
-  
-● Unlimited EXP(remove)  
- Reduce current level to achieve upgrad effect(when your level is too high please do not use this function)  
 	
 # Screenshot  
 ![Image text](https://github.com/joeyman2525/holocure-trainer/blob/main/V1.0.2%20English.jpg)  
