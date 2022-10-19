@@ -1,6 +1,8 @@
 ﻿# holocure-trainer  
 This trainer can help you dynamically modify the game   
 
+This is a translated copy of v1.0.2 of holocure-trainer for version 0.3 of HoloCure
+
 download(exe)  
 
 ```
