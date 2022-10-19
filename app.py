@@ -1,10 +1,10 @@
+import numpy as np
 import sys
-import threading
 from PyQt5.QtWidgets import QApplication, QMessageBox, QWidget
 from UI import Ui_Form
 from pymem import *
 from pymem.process import *
-from time import sleep
+import threading
 
 class AppWindow(QWidget):
 
@@ -12,100 +12,73 @@ class AppWindow(QWidget):
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        self.lang = self.ui.lang
-        self.language = {'zh_TW':{'scan':['掃描', '已掃描到遊戲',],
-                             'error':['錯誤', '請先開啟遊戲後再按偵測程式']},
-                             
-                    'en':{'scan':['Scen','Scan Completed'],
-                          'error':['Error','Please start the game first, then click the detect button']}
-                          
-        }
-        #偵測按鈕
-        self.ui.page_button.clicked.connect(self.find_windows)  
-        
-        #stage1
-        self.ui.stage_1[0].clicked.connect(lambda: self.threading_function('stage1_HP'))
-        self.ui.stage_1[1].clicked.connect(lambda: self.threading_function('stage1_EX'))
-        self.ui.stage_1[2].clicked.connect(lambda: self.threading_function('stage1_range'))  
-        
-        #stage2
-        self.ui.stage_2[0].clicked.connect(lambda: self.threading_function('stage2_HP'))
-        self.ui.stage_2[1].clicked.connect(lambda: self.threading_function('stage2_EX'))
-        self.ui.stage_2[2].clicked.connect(lambda: self.threading_function('stage2_range'))
-        
-        #stage3
-        self.ui.stage_3[0].clicked.connect(lambda: self.threading_function('stage3_HP'))
-        self.ui.stage_3[1].clicked.connect(lambda: self.threading_function('stage3_EX'))
-        self.ui.stage_3[2].clicked.connect(lambda: self.threading_function('stage3_range'))
-        
-        #other
-        self.ui.other[0].clicked.connect(lambda: self.threading_function('coin'))
-        self.ui.other[1].clicked.connect(lambda: self.threading_function('lavelup'))
 
-        
+        #detect game instance button
+        self.ui.page_button.clicked.connect(self.find_windows)
 
-           
+        #multithreaded execution
+        self.ui.extra_func[0].clicked.connect(lambda: self.threading(self.ui.extra_func[0].text()))
+        self.ui.extra_func[1].clicked.connect(lambda: self.threading(self.ui.extra_func[1].text()))
+        self.ui.extra_func[2].clicked.connect(lambda: self.threading(self.ui.extra_func[2].text()))
+        self.ui.extra_func[3].clicked.connect(lambda: self.threading(self.ui.extra_func[3].text()))
+
         self.move(40, 40)
         self.show()
-        
-    def find_windows(self):
-        functions = [self.ui.stage_1, self.ui.stage_2, self.ui.stage_3]
 
+    def find_windows(self):
         try:
+            #window name
             self.windows = Pymem("HoloCure.exe")
-            self.game_module = module_from_name(self.windows.process_handle, "HoloCure.exe").lpBaseOfDll
-            for function in functions:
-                for enable in function:
-                    enable.setEnabled(True) 
-                self.ui.other[0].setEnabled(True)
-            QMessageBox.information(None, self.language[self.lang]['scan'][0], self.language[self.lang]['scan'][1])
-            
+            #get dll
+            self.game_module = module_from_name(self.windows.process_handle, "Holocure.exe").lpBaseOfDll
+            #enable function
+            for cnt,i in enumerate(self.ui.extra_func):
+                if cnt == 5 or cnt == 4:
+                    continue
+                i.setEnabled(True)
+            QMessageBox.information(None, 'Scanning for game instance', 'Game instance found')
         except:
-            QMessageBox.critical(None, self.language[self.lang]['error'][0], self.language[self.lang]['error'][1])
-            
-    def threading_function(self, text):   
-        t = threading.Thread(target = self.threading_enable, args = (text,))
+            QMessageBox.critical(None, 'Error, game instance not found', 'Please start the game first, then click the detect button')
+
+    def threading(self, text):
+        t = threading.Thread(target = self.Enable,args = (text,))
+        #Prevent child thread from not closing
         t.setDaemon(True)
         t.start()
-    
-    def threading_enable(self,text):
+        #print(threading.active_count())
+
+    def Enable(self,text):
+        #index, base address, offsets
         options_info = {
-                     'stage1_HP':[self.ui.stage_1[0], 1104006500, 0x006FBD7C,[0x1900,0x140,0x24,0x10,0x990,0x4]],
-                     'stage1_EX':[self.ui.stage_1[1], 1104006500, 0x006FBD7C, [0x1900,0x140,0x24,0x10,0xB28,0x04]],
-                     'stage1_range':[self.ui.stage_1[2], 1104006500, 0x006FBD7C,[0x1900,0x140,0x24,0x10,0x3E4,0x04]],
-                     'stage2_HP':[self.ui.stage_2[0], 1104006500, 0x006FBD7C,[0x1830,0x140,0x24,0x10,0x990,0x04]],
-                     'stage2_EX':[self.ui.stage_2[1], 1104006500, 0x006FBD7C, [0x1830,0x140,0x24,0x10,0xB28,0x4]],
-                     'stage2_range':[self.ui.stage_2[2], 1104006500, 0x006FBD7C,[0x1830,0x140,0x24,0x10,0x3E4,0x4]],
-                     'stage3_HP':[self.ui.stage_3[0], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0x990,0x04]],
-                     'stage3_EX':[self.ui.stage_3[1], 1104006500, 0x006FBD7C, [0x18FC,0x140,0x24,0x10,0xB28,0x4]],
-                     'stage3_range':[self.ui.stage_3[2], 1104006500, 0x006FBD7C,[0x18FC,0x140,0x24,0x10,0x3E4,0x4]],
-                     'coin':[self.ui.other[0], 1104006500, 0x00705AB4, [0x4,0x0,0x0,0x140,0xC,0x14]],
-                     'lavelup':[self.ui.other[1], 1072693248, 0x006FBD7C, [0x18FC,0x10,0x84,0x7C,0x8C,0xC84]],
+                     'Invincibility':[0,0x006FBD7C,[0x190C,0x144,0x140,0x140,0x140,0x140,0x24,0x10,0x2B8,0x4],1200470147],
+                     'Unlimited Special Attack':[1,0x006FBD7C, [0x190C,0x140,0x140,0x140,0x24,0x10,0x9FC,0x4],1100470147],
+                     'Unlimited Pickup Range':[2,0x006F9CD0,[0x4,0x24,0x10,0x3C,0x04],1100470147],
+                     'Unlimited Holocoins':[3,0x00705AB4, [0x4,0x0,0x18,0xA4,0x334],1100470147],
                     }
-        function, value, address, offsets = options_info[text]
+        index, address, offsets,value = options_info[text]
+
+
+        #lock data
         while(1):
-            if function.isChecked():
+            if self.ui.extra_func[index].isChecked():
                 try:
-                    addr  = self.calculate_offsets(self.game_module + address, offsets)
-                    if self.windows.read_int(addr) != value:
-                        self.windows.write_int(addr, value)
-                        #sleep(100/1000)
+                    addr_tmp  = self.Hacking(self.game_module + address, offsets)
+                    #Dynamically obtaining data sometimes judges incorrectly, if the value is lower than 1070000000, it is the wrong address
+                    if self.windows.read_int(addr_tmp) > 1070000000:
+                        addr = addr_tmp
+                    self.windows.write_int(addr, value)
                 except:
                     pass
             else:
                 break
-    
-   
-     
-    
-    
-    def calculate_offsets(self, address, offsets):
+
+    def Hacking(self, address, offsets):
         addr = self.windows.read_int(address)
         for cnt,offset in enumerate(offsets):
             if cnt+1 != len(offsets):
-                addr = self.windows.read_int(addr + offset)           
+                addr = self.windows.read_int(addr + offset)
         return addr + offsets[-1]
-        
+
 
 
 
