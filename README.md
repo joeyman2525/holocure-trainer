@@ -33,5 +33,5 @@ https://github.com/joeyman2525/holocure-trainer/releases/tag/v1.0.2-English
 
 ## Please Note
 1.Don't use HoloCure Launcher to open the game  
-2.When unlocking a new collab, the tool will not work 
+2.When unlocking a new collab, the tool will not work                   
 3.If the functions don't work, pressing esc and returning to game may fix it
